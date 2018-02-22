@@ -22,7 +22,33 @@ class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
 
         contents.delegate = self
         
+        //백그라운드 설정
+        let bgImage = UIImage(named: "memo-background")!
+        self.view.backgroundColor = UIColor(patternImage: bgImage)
         
+        //텍스트뷰의 기본 속성
+        self.contents.layer.borderWidth = 0
+        self.contents.layer.borderColor = UIColor.clear.cgColor
+        self.contents.backgroundColor = UIColor.clear
+        
+        //줄간격 설정
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 9
+        self.contents.attributedText = NSAttributedString(string: " ", attributes: [NSAttributedStringKey.paragraphStyle: style])
+        self.contents.text = ""
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //네비게이션 바 설정
+        let bar = self.navigationController?.navigationBar
+        //네비게이션 타임 인터벌 설정
+        let ts = TimeInterval(0.3)
+        //애니메이션 효과 설정
+        UIView.animate(withDuration: ts) {
+            //네비게이션의 알파값이 터치의 반응에 따라, 1 ~ 0 으로 조절된다.
+            bar?.alpha = (bar?.alpha == 0 ? 1 : 0)
+        }
     }
     
     @IBAction func pick(_ sender: Any) {
@@ -79,13 +105,17 @@ class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
     
     @IBAction func save(_ sender: Any) {
         
+        //경고창에 사용될 뷰 컨트롤러 구성
+        let alertV = UIViewController()
+        let iconImage = UIImage(named: "warning-icon-60")
+        alertV.view = UIImageView(image: iconImage)
+        alertV.preferredContentSize = iconImage?.size ?? CGSize.zero
+        
         guard self.contents.text.isEmpty == false else {
-            
             let alert = UIAlertController(title: nil, message: "메시지를 입력하여 주십시오", preferredStyle: .alert)
-            
-            
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            
+            //콘텐츠 뷰 영역에 alertV를 등록한다.
+            alert.setValue(alertV, forKey: "contentViewControllers")
             self.present(alert, animated: true, completion: nil)
             return
         }

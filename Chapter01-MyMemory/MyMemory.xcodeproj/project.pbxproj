@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC4A9BE7203E866F0014F515 /* CSLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A9BE6203E866F0014F515 /* CSLogButton.swift */; };
 		FC9B40F01FA5CE28004A613D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9B40EF1FA5CE28004A613D /* AppDelegate.swift */; };
 		FC9B40F51FA5CE28004A613D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B40F31FA5CE28004A613D /* Main.storyboard */; };
 		FC9B40F81FA5CE28004A613D /* MyMemory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC9B40F61FA5CE28004A613D /* MyMemory.xcdatamodeld */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC4A9BE6203E866F0014F515 /* CSLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSLogButton.swift; sourceTree = "<group>"; };
 		FC9B40EC1FA5CE28004A613D /* MyMemory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMemory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC9B40EF1FA5CE28004A613D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC9B40F41FA5CE28004A613D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC866A61FA73A320093AB03 /* MemoCell.swift */,
+				FC4A9BE6203E866F0014F515 /* CSLogButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4A9BE7203E866F0014F515 /* CSLogButton.swift in Sources */,
 				FCC866A11FA739A60093AB03 /* MemoListVC.swift in Sources */,
 				FCC866A51FA739DD0093AB03 /* MemoReadVC.swift in Sources */,
 				FC9B40F81FA5CE28004A613D /* MyMemory.xcdatamodeld in Sources */,
