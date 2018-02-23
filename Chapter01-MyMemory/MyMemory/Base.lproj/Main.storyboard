@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BKO-UP-lef">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dbg-oU-aIb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -233,10 +233,38 @@
             </objects>
             <point key="canvasLocation" x="1378" y="97"/>
         </scene>
+        <!--Side Bar View Controller-->
+        <scene sceneID="3po-q3-rKr">
+            <objects>
+                <tableViewController id="9Ci-ft-dAI" customClass="SideBarViewController" customModule="MyMemory" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RP9-Fd-Fgk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menucell" id="Ayt-ym-Ktt">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ayt-ym-Ktt" id="wia-1R-gdV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9Ci-ft-dAI" id="I7D-5V-MS0"/>
+                            <outlet property="delegate" destination="9Ci-ft-dAI" id="QKn-Td-O7L"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JtY-Pj-JCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-330" y="955"/>
+        </scene>
         <!--메모 작성-->
         <scene sceneID="a1m-i1-3yC">
             <objects>
-                <viewController id="SK7-S4-Ik4" customClass="MemoFormVC" customModule="MyMemory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemoForm" id="SK7-S4-Ik4" customClass="MemoFormVC" customModule="MyMemory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Q0-qS-1Xl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -291,6 +319,25 @@
             </objects>
             <point key="canvasLocation" x="564" y="858"/>
         </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="TIG-2R-LK0">
+            <objects>
+                <viewController id="Dbg-oU-aIb" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mTV-nP-o4e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="cRG-4I-tgW"/>
+                    </view>
+                    <connections>
+                        <segue destination="BKO-UP-lef" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="70Q-9H-rs4"/>
+                        <segue destination="9Ci-ft-dAI" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="yb2-xK-vza"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Zs-G7-QJR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-889" y="97"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="O7m-jI-DMU">
             <objects>
@@ -307,7 +354,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ha-HV-V3u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-311" y="97"/>
+            <point key="canvasLocation" x="-65" y="97"/>
         </scene>
     </scenes>
 </document>

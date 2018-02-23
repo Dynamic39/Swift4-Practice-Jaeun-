@@ -14,7 +14,24 @@ class MemoListVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        makeVCForSidebarButton()
 
+    }
+    
+    func makeVCForSidebarButton() {
+        //SWRevealViewController 객체를 읽어 온다.
+        if let revealVC = self.revealViewController() {
+            let btn = UIBarButtonItem()
+            btn.image = UIImage(named: "sidemenu.png")
+            btn.target = revealVC
+            btn.action = #selector(revealVC.revealToggle(_:)) // 버튼 클릭시 토글 호출
+            
+            self.navigationItem.leftBarButtonItem = btn // 버튼 객체에 넣어줌
+            
+            self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

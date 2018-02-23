@@ -114,8 +114,9 @@ class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         guard self.contents.text.isEmpty == false else {
             let alert = UIAlertController(title: nil, message: "메시지를 입력하여 주십시오", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
             //콘텐츠 뷰 영역에 alertV를 등록한다.
-            alert.setValue(alertV, forKey: "contentViewControllers")
+            alert.setValue(alertV, forKey: "contentViewController")
             self.present(alert, animated: true, completion: nil)
             return
         }
@@ -133,13 +134,8 @@ class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         self.navigationController?.popViewController(animated: true)
         
     }
-    
-    
-    
-    
-    
-    
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
