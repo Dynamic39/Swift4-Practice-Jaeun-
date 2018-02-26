@@ -26,6 +26,28 @@ class ListViewController: UITableViewController {
 
     }
     
+    //제스쳐로 인식
+    @IBAction func editNameLB(_ sender: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: nil, message: "이름을 입력하세요", preferredStyle: .alert)
+        
+        alert.addTextField { (textField) in
+            textField.text = self.nameLB.text
+        }
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            let value = alert.textFields?[0].text
+            let plist = UserDefaults.standard
+            plist.setValue(value, forKey: "name")
+            
+            plist.synchronize()
+            self.nameLB.text = value
+        }
+        alert.addAction(action)
+        self.present(alert, animated: false, completion: nil)
+    }
+    
+    
+    
     @IBAction func chageGender(_ sender: UISegmentedControl) {
         //성별 바꿔주기
         let value = sender.selectedSegmentIndex
@@ -53,30 +75,29 @@ extension ListViewController {
     //각 row의 선택별로 적절한 값을 주기위한 메서드를 추가한다.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //이름 창 띄우기
-        if indexPath.row == 0 {
-            //얼럿 컨트롤러 실행
-            let alert = UIAlertController(title: nil, message: "이름을 입력하세요", preferredStyle: .alert)
-            //텍스트 필드 추가
-            alert.addTextField(configurationHandler: { (textField) in
-                textField.text = self.nameLB.text
-            })
-            //액션 추가
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                // 바뀐 내용을 추가해줌
-                let value = alert.textFields?[0].text
-                let plist = UserDefaults.standard
-                
-                plist.setValue(value, forKey: "name")
-                plist.synchronize()
-                
-                //바뀐 내용을 이름 레이블에도 적용하여 준다.
-                self.nameLB.text = value
-                
-            }))
-            //보여주기
-            self.present(alert, animated: false, completion: nil)
-        }
+//        //이름 창 띄우기(TableView Delegate 활용)
+//        if indexPath.row == 0 {
+//            //얼럿 컨트롤러 실행
+//            let alert = UIAlertController(title: nil, message: "이름을 입력하세요", preferredStyle: .alert)
+//            //텍스트 필드 추가
+//            alert.addTextField(configurationHandler: { (textField) in
+//                textField.text = self.nameLB.text
+//            })
+//            //액션 추가
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+//                // 바뀐 내용을 추가해줌
+//                let value = alert.textFields?[0].text
+//                let plist = UserDefaults.standard
+//                plist.setValue(value, forKey: "name")
+//                plist.synchronize()
+//
+//                //바뀐 내용을 이름 레이블에도 적용하여 준다.
+//                self.nameLB.text = value
+//
+//            }))
+//            //보여주기
+//            self.present(alert, animated: false, completion: nil)
+//        }
         
     }
     
