@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC5A04D12044610500991635 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC5A04D02044610500991635 /* data.plist */; };
+		FC5A04D32044613900991635 /* CustomPlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A04D22044613900991635 /* CustomPlistViewController.swift */; };
 		FCEACA742043CD860098C2E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEACA732043CD860098C2E9 /* AppDelegate.swift */; };
 		FCEACA792043CD860098C2E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCEACA772043CD860098C2E9 /* Main.storyboard */; };
 		FCEACA7B2043CD860098C2E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCEACA7A2043CD860098C2E9 /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC5A04D02044610500991635 /* data.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
+		FC5A04D22044613900991635 /* CustomPlistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlistViewController.swift; sourceTree = "<group>"; };
 		FCEACA702043CD860098C2E9 /* Chapter05-UserDefaults.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chapter05-UserDefaults.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCEACA732043CD860098C2E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCEACA782043CD860098C2E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				FCEACA7C2043CD860098C2E9 /* LaunchScreen.storyboard */,
 				FCEACA7F2043CD860098C2E9 /* Info.plist */,
 				FCEACA852043DF060098C2E9 /* ListViewController.swift */,
+				FC5A04D02044610500991635 /* data.plist */,
+				FC5A04D22044613900991635 /* CustomPlistViewController.swift */,
 			);
 			path = "Chapter05-UserDefaults";
 			sourceTree = "<group>";
@@ -125,6 +131,7 @@
 			files = (
 				FCEACA7E2043CD860098C2E9 /* LaunchScreen.storyboard in Resources */,
 				FCEACA7B2043CD860098C2E9 /* Assets.xcassets in Resources */,
+				FC5A04D12044610500991635 /* data.plist in Resources */,
 				FCEACA792043CD860098C2E9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCEACA862043DF060098C2E9 /* ListViewController.swift in Sources */,
+				FC5A04D32044613900991635 /* CustomPlistViewController.swift in Sources */,
 				FCEACA742043CD860098C2E9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
