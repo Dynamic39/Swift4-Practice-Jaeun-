@@ -110,9 +110,12 @@
                                                         <constraint firstAttribute="width" constant="121" id="4XF-P6-kmI"/>
                                                     </constraints>
                                                     <segments>
-                                                        <segment title="First"/>
-                                                        <segment title="Second"/>
+                                                        <segment title="남"/>
+                                                        <segment title="여"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="changeGender:" destination="gzL-j8-ZNb" eventType="valueChanged" id="T0b-gb-mnF"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -143,6 +146,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z01-eU-Vh2">
                                                     <rect key="frame" x="306" y="7" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="changeMarried:" destination="gzL-j8-ZNb" eventType="valueChanged" id="e5Z-fh-dWc"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -165,6 +171,9 @@
                     <navigationItem key="navigationItem" title="사용자 정보" id="egE-Tt-teL"/>
                     <connections>
                         <outlet property="accountTF" destination="AFb-5x-VPC" id="Nvu-km-kzK"/>
+                        <outlet property="genderSG" destination="SzY-cE-2xg" id="R7p-xo-0W1"/>
+                        <outlet property="marriedSW" destination="z01-eU-Vh2" id="BWm-Tl-YER"/>
+                        <outlet property="nameLB" destination="bRN-0s-i1F" id="38f-xj-YOI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nfm-q2-S5P" userLabel="First Responder" sceneMemberID="firstResponder"/>
