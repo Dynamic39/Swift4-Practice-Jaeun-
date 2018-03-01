@@ -29,6 +29,22 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         
         makeToolbarOnthePickerView()
         makePickerDoneBtn()
+        loadToApp()
+        
+        
+        
+    }
+    
+    func loadToApp() {
+        
+        let plist = UserDefaults.standard
+        //저장된 배열 불러오기 아니면 초기화
+        let accountlist = plist.array(forKey: "accountlist") as? [String] ?? [String]()
+        self.accountList = accountlist
+        
+        if let account = plist.string(forKey: "selectedAccount") {
+            self.accountTF.text = account
+        }
         
     }
     
@@ -36,19 +52,41 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
     @IBAction func changeMarried(_ sender: UISwitch) {
         
         let value = sender.isOn // T and F
-        let plist = UserDefaults.standard
         
-        plist.set(value, forKey: "married")
-        plist.synchronize()
+        //저장 로직
+        //1. 읽어올 파일명 정리
+        let customPlist = "\(self.accountTF.text!).plist"
+        //2. 디렉토리 경로 찾기
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let path = paths[0] as NSString
+        //3. 프로퍼티 객체를 읽어옴
+        let plist = path.strings(byAppendingPaths: [customPlist]).first!
+        //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
+        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
+        
+        data.setValue(value, forKey: "married")
+        data.write(toFile: plist, atomically: true)
+        
+        print("Custom Plist 확인 결혼 여부 = ", plist)
         
     }
     @IBAction func changeGender(_ sender: UISegmentedControl) {
         
         let value = sender.selectedSegmentIndex // 0, 1
-        let plist = UserDefaults.standard
+
+        //저장 로직
+        //1. 읽어올 파일명 정리
+        let customPlist = "\(self.accountTF.text!).plist"
+        //2. 디렉토리 경로 찾기
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let path = paths[0] as NSString
+        //3. 프로퍼티 객체를 읽어옴
+        let plist = path.strings(byAppendingPaths: [customPlist]).first!
+        //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
+        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
         
-        plist.set(value, forKey: "gender")
-        plist.synchronize()
+        data.setValue(value, forKey: "gender")
+        data.write(toFile: plist, atomically: true)
         
     }
     
@@ -95,6 +133,9 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         
         alert.addTextField { (textfield) in
             textfield.placeholder = "ex) abc@gmail.com"
+            
+
+            
         }
         //액션 동작 설정
         let action = UIAlertAction(title: "OK", style: .default) { (_) in
@@ -107,6 +148,13 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
                 self.nameLB.text = ""
                 self.genderSG.selectedSegmentIndex = 0
                 self.marriedSW.isOn = false
+                
+                //계정목록을 통채로 저장한다.
+                let plist = UserDefaults.standard
+                
+                plist.set(self.accountList, forKey: "accountlist")
+                plist.set(account, forKey: "selectedAccount")
+                plist.synchronize()
                 
             }
         }
@@ -136,6 +184,11 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         let account = self.accountList[row] // 선택된 계정
         self.accountTF.text = account
         
+        //계정을 생성하면 이게정을 선택한 것으로 간주하고 저장한다.
+        let plist = UserDefaults.standard
+        plist.set(account, forKey: "selectedAccount")
+        plist.synchronize()
+        
         //피커뷰 닫음
         //self.view.endEditing(true)
         
@@ -153,12 +206,27 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
             let action = UIAlertAction(title: "OK", style: .default, handler: { (_) in
                 let value = alert.textFields?.first?.text
                 
-                let plist = UserDefaults.standard
-                plist.set(value, forKey: "name")
+                //저장 로직을 위해 주석처리
+//                let plist = UserDefaults.standard
+//                plist.set(value, forKey: "name")
+//                plist.synchronize()
+                
+                //저장 로직
+                //1. 읽어올 파일명 정리
+                let customPlist = "\(self.accountTF.text!).plist"
+                //2. 디렉토리 경로 찾기
+                let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+                let path = paths[0] as NSString
+                //3. 프로퍼티 객체를 읽어옴
+                let plist = path.strings(byAppendingPaths: [customPlist]).first!
+                //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
+                let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
+                
+                data.setValue(value, forKey: "name")
+                data.write(toFile: plist, atomically: true)
+                
                 
                 self.nameLB.text = value
-                
-                plist.synchronize()
             })
             
             alert.addAction(action)
