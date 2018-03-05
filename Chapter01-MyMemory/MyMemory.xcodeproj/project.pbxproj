@@ -31,6 +31,7 @@
 		FCC866A71FA73A320093AB03 /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A61FA73A320093AB03 /* MemoCell.swift */; };
 		FCC866A91FA73AAE0093AB03 /* MemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A81FA73AAE0093AB03 /* MemoData.swift */; };
 		FCC866B21FA753D00093AB03 /* fountainpen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC866B11FA753CF0093AB03 /* fountainpen@2x.png */; };
+		FCEC0BA0204D349C000DC226 /* UserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		FCC866A61FA73A320093AB03 /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
 		FCC866A81FA73AAE0093AB03 /* MemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoData.swift; sourceTree = "<group>"; };
 		FCC866B11FA753CF0093AB03 /* fountainpen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fountainpen@2x.png"; sourceTree = "<group>"; };
+		FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoKey.swift; path = "../../../Chapter05-CustomPlist/Chapter05-CustomPlist/UserInfoKey.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC866A81FA73AAE0093AB03 /* MemoData.swift */,
+				FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				FCC866A11FA739A60093AB03 /* MemoListVC.swift in Sources */,
 				FCC866A51FA739DD0093AB03 /* MemoReadVC.swift in Sources */,
 				FC9B40F81FA5CE28004A613D /* MyMemory.xcdatamodeld in Sources */,
+				FCEC0BA0204D349C000DC226 /* UserInfoKey.swift in Sources */,
 				FCC866A91FA73AAE0093AB03 /* MemoData.swift in Sources */,
 				FC4A9C4A203FCE800014F515 /* SWRevealViewController.m in Sources */,
 				FCC866A31FA739CF0093AB03 /* MemoFormVC.swift in Sources */,
