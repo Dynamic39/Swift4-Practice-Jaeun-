@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let profileImage = UIImageView()
     let tv = UITableView()
@@ -25,11 +25,76 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tv.delegate = self
         self.drawBtn()
         self.navigationController?.navigationBar.isHidden = true
+        changeProfileImage()
 
+    }
+    
+    //탭 했을시 제스쳐 동작으로 시행 될 수 있도록 한다.
+    func changeProfileImage() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(profile(_:)))
+        self.profileImage.addGestureRecognizer(tap)
+        self.profileImage.isUserInteractionEnabled = true
+    }
+    
+    //이미지피커를 이용한, 사진 변경기능 구현
+    func imgPicker(_ source: UIImagePickerControllerSourceType) {
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = source
+        picker.delegate = self
+        picker.allowsEditing = true
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    //profile 을 구성하기 위한 메서드
+    @objc func profile(_ sender: UIButton) {
+        
+        guard self.uinfo.account != nil else {
+            self.doLogin(self)
+            return
+        }
+        
+        let alert = UIAlertController(title: nil, message: "사진을 가져올 곳을 선택하세요", preferredStyle: .actionSheet)
+        
+        //카메라 사용시
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: "카메라", style: .default, handler: { (_) in
+                //카메라 기능 호출
+                self.imgPicker(.camera)
+            }))
+        }
+        //앨범 사용 가능시
+        if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            alert.addAction(UIAlertAction(title: "앨범", style: .default, handler: { (_) in
+                self.imgPicker(.savedPhotosAlbum)
+            }))
+        }
+        //포토라이브러리 사용 가능시
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(UIAlertAction(title: "포토 라이브러리", style: .default, handler: { (_) in
+                self.imgPicker(.photoLibrary)
+            }))
+        }
+        //캔슬 버튼 추가
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
         
         
     }
     
+    //사진이 선택되면 자동으로 호출될 메서드
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.uinfo.profile = img
+            self.profileImage.image = img
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
     //로그인 화면 만들기
     @objc func doLogin(_ sender:Any) {
         let loginAlert = UIAlertController(title: "LOGIN", message: nil, preferredStyle: .alert)
