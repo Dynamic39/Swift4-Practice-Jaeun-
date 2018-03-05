@@ -19,6 +19,10 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
     var toolBar:UIToolbar?
     var accountList = [String]()
     
+    //기본 템플릿을 사용하기 위하여 변수를 선언한다.
+    //읽기 전용이므로 Mutable을 사용해서는 안된다.
+    var defaultsPList: NSDictionary!
+    
     override func viewDidLoad() {
         
         //피커뷰 인스턴스 생성
@@ -29,11 +33,18 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         
         makeToolbarOnthePickerView()
         makePickerDoneBtn()
+        makeNavigationBtnHandler()
         loadToApp()
         
+        //메인번들에서 UserInfo Plist를 읽어온다.
+        if let defaultsPlistPath = Bundle.main.path(forResource: "UserInfo", ofType: "plist")
+        {
+            self.defaultsPList = NSDictionary(contentsOfFile: defaultsPlistPath)
+        }
         
         
     }
+    
     
     func loadToApp() {
         
@@ -42,8 +53,30 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         let accountlist = plist.array(forKey: "accountlist") as? [String] ?? [String]()
         self.accountList = accountlist
         
+        //selectedAccount가 있는 경우만 해당됨
         if let account = plist.string(forKey: "selectedAccount") {
             self.accountTF.text = account
+            
+            //경로 가지고 오기
+            let customPlist = "\(account).plist" // 읽어올 파일명
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let path = paths[0] as NSString
+            let clist = path.strings(byAppendingPaths: [customPlist]).first!
+            
+            //경로를 딕셔너리 형태로 바꿔주기(수정이 불가능한 객체를 처음에 로드해준다.)
+            let data = NSDictionary(contentsOfFile: clist)
+            
+            self.nameLB.text = data?["name"] as? String
+            self.genderSG.selectedSegmentIndex = data?["gender"] as? Int ?? 0
+            self.marriedSW.isOn = data?["married"] as? Bool ?? false
+            
+        }
+        
+        //계정 정보가 없는 경우 막아 줄 수 있음
+        if (self.accountTF.text?.isEmpty)! {
+            self.accountTF.placeholder = "등록된 계정이 없습니다."
+            self.genderSG.isEnabled = false
+            self.marriedSW.isEnabled = false
         }
         
     }
@@ -62,7 +95,7 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         //3. 프로퍼티 객체를 읽어옴
         let plist = path.strings(byAppendingPaths: [customPlist]).first!
         //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
-        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
+        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary(dictionary: defaultsPList)
         
         data.setValue(value, forKey: "married")
         data.write(toFile: plist, atomically: true)
@@ -83,11 +116,21 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
         //3. 프로퍼티 객체를 읽어옴
         let plist = path.strings(byAppendingPaths: [customPlist]).first!
         //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
-        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
+        let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary(dictionary: defaultsPList) // 기본값을 넣어준다. 읽기 전용이기 때문에 Mutable인스턴스를 사용하여 초기화 하여 준다.
         
         data.setValue(value, forKey: "gender")
         data.write(toFile: plist, atomically: true)
         
+    }
+    
+    func makeNavigationBtnHandler () {
+        
+        let addBtn = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(newAccount(_:)))
+
+        self.navigationItem.rightBarButtonItems = [addBtn]
     }
     
     
@@ -122,6 +165,24 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
     
     @objc func pickerDone(_ sender:Any){
         self.view.endEditing(true)
+        
+        //옵셔널 타입을 이용하여 진행
+        if let account = self.accountTF.text
+        {
+            //경로 가지고 오기
+            let customPlist = "\(account).plist" // 읽어올 파일명
+            let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let path = paths[0] as NSString
+            let clist = path.strings(byAppendingPaths: [customPlist]).first!
+            
+            //경로를 딕셔너리 형태로 바꿔주기(수정이 불가능한 객체를 처음에 로드해준다.)
+            let data = NSDictionary(contentsOfFile: clist)
+            
+            self.nameLB.text = data?["name"] as? String
+            self.genderSG.selectedSegmentIndex = data?["gender"] as? Int ?? 0
+            self.marriedSW.isOn = data?["married"] as? Bool ?? false
+        }
+        
     }
     
     @objc func newAccount(_ sender:Any) {
@@ -148,6 +209,10 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
                 self.nameLB.text = ""
                 self.genderSG.selectedSegmentIndex = 0
                 self.marriedSW.isOn = false
+                
+                //계정을 다시 활성화 처리하여 준다
+                self.genderSG.isEnabled = true
+                self.marriedSW.isEnabled = true
                 
                 //계정목록을 통채로 저장한다.
                 let plist = UserDefaults.standard
@@ -197,7 +262,7 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
     //테이블 뷰 내용정리
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 1 {
+        if indexPath.row == 1 && !(self.accountTF.text?.isEmpty)! {
             let alert = UIAlertController(title: nil, message: "이름을 입력하세요", preferredStyle: .alert)
             alert.addTextField() {
                 $0.text = self.nameLB.text // 기본값 넣어주기
@@ -220,7 +285,7 @@ class ListViewController: UITableViewController, UIPickerViewDelegate, UIPickerV
                 //3. 프로퍼티 객체를 읽어옴
                 let plist = path.strings(byAppendingPaths: [customPlist]).first!
                 //4. 딕셔너리 객체로 변환, 없을시 새로 만들어줌
-                let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary()
+                let data = NSMutableDictionary(contentsOfFile: plist) ?? NSMutableDictionary(dictionary: self.defaultsPList)
                 
                 data.setValue(value, forKey: "name")
                 data.write(toFile: plist, atomically: true)

@@ -12,6 +12,7 @@
 		FC5A04E8204681AF00991635 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC5A04E7204681AF00991635 /* Assets.xcassets */; };
 		FC5A04EB204681AF00991635 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5A04E9204681AF00991635 /* LaunchScreen.storyboard */; };
 		FC5A04F52046857600991635 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5A04F42046857600991635 /* ListViewController.swift */; };
+		FCEC0B9A204D0A43000DC226 /* UserInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCEC0B99204D0A43000DC226 /* UserInfo.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		FC5A04EA204681AF00991635 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC5A04EC204681AF00991635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5A04F42046857600991635 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		FCEC0B99204D0A43000DC226 /* UserInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserInfo.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				FC5A04E9204681AF00991635 /* LaunchScreen.storyboard */,
 				FC5A04EC204681AF00991635 /* Info.plist */,
 				FC5A04F42046857600991635 /* ListViewController.swift */,
+				FCEC0B99204D0A43000DC226 /* UserInfo.plist */,
 			);
 			path = "Chapter05-CustomPlist";
 			sourceTree = "<group>";
@@ -126,6 +129,7 @@
 				FC5A04EB204681AF00991635 /* LaunchScreen.storyboard in Resources */,
 				FC5A04E8204681AF00991635 /* Assets.xcassets in Resources */,
 				FC5A04E6204681AF00991635 /* Main.storyboard in Resources */,
+				FCEC0B9A204D0A43000DC226 /* UserInfo.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
