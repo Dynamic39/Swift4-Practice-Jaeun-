@@ -28,7 +28,6 @@ class MemoListVC: UITableViewController {
             btn.action = #selector(revealVC.revealToggle(_:)) // 버튼 클릭시 토글 호출
             
             self.navigationItem.leftBarButtonItem = btn // 버튼 객체에 넣어줌
-            
             self.view.addGestureRecognizer(revealVC.panGestureRecognizer())
 
         }
@@ -38,6 +37,14 @@ class MemoListVC: UITableViewController {
         super.viewWillAppear(true)
         
         self.tableView.reloadData()
+        
+        let ud = UserDefaults.standard
+        if ud.bool(forKey: UserInfoKey.tutorial) == false {
+            let vc = self.instanceTutorialVC(name: "MasterVC")
+            self.present(vc!, animated: false)
+            
+            return
+        }
         
     }
 

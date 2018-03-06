@@ -32,6 +32,10 @@
 		FCC866A91FA73AAE0093AB03 /* MemoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A81FA73AAE0093AB03 /* MemoData.swift */; };
 		FCC866B21FA753D00093AB03 /* fountainpen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC866B11FA753CF0093AB03 /* fountainpen@2x.png */; };
 		FCEC0BA0204D349C000DC226 /* UserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */; };
+		FCF7737C204D4DE500CF15A8 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF7737B204D4DE500CF15A8 /* Tutorial.storyboard */; };
+		FCF7737E204E296200CF15A8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7737D204E296200CF15A8 /* Utils.swift */; };
+		FCF77380204E2A6800CF15A8 /* TutorialContentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7737F204E2A6800CF15A8 /* TutorialContentsVC.swift */; };
+		FCF77383204E3A9E00CF15A8 /* TutorialMasterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF77382204E3A9E00CF15A8 /* TutorialMasterVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +68,10 @@
 		FCC866A81FA73AAE0093AB03 /* MemoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoData.swift; sourceTree = "<group>"; };
 		FCC866B11FA753CF0093AB03 /* fountainpen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fountainpen@2x.png"; sourceTree = "<group>"; };
 		FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoKey.swift; path = "../../../Chapter05-CustomPlist/Chapter05-CustomPlist/UserInfoKey.swift"; sourceTree = "<group>"; };
+		FCF7737B204D4DE500CF15A8 /* Tutorial.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		FCF7737D204E296200CF15A8 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		FCF7737F204E2A6800CF15A8 /* TutorialContentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentsVC.swift; sourceTree = "<group>"; };
+		FCF77382204E3A9E00CF15A8 /* TutorialMasterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialMasterVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,7 @@
 		FC9B40EE1FA5CE28004A613D /* MyMemory */ = {
 			isa = PBXGroup;
 			children = (
+				FCF77381204E2A9800CF15A8 /* Tutorial */,
 				FC4A9C46203FCE670014F515 /* OpenSource */,
 				FCC866B01FA753A90093AB03 /* Resource */,
 				FCC866AD1FA73AC10093AB03 /* Controller */,
@@ -113,6 +122,7 @@
 				FCC866AA1FA73AB40093AB03 /* Model */,
 				FC9B40EF1FA5CE28004A613D /* AppDelegate.swift */,
 				FC9B40F31FA5CE28004A613D /* Main.storyboard */,
+				FCF7737B204D4DE500CF15A8 /* Tutorial.storyboard */,
 				FC9B40F91FA5CE28004A613D /* Assets.xcassets */,
 				FC9B40FB1FA5CE28004A613D /* LaunchScreen.storyboard */,
 				FC9B40FE1FA5CE28004A613D /* Info.plist */,
@@ -135,6 +145,7 @@
 			children = (
 				FCC866A61FA73A320093AB03 /* MemoCell.swift */,
 				FC4A9BE6203E866F0014F515 /* CSLogButton.swift */,
+				FCF7737D204E296200CF15A8 /* Utils.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -166,6 +177,15 @@
 				FC4A9C4C203FCF260014F515 /* sidemenu.png */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		FCF77381204E2A9800CF15A8 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				FCF7737F204E2A6800CF15A8 /* TutorialContentsVC.swift */,
+				FCF77382204E3A9E00CF15A8 /* TutorialMasterVC.swift */,
+			);
+			path = Tutorial;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +256,7 @@
 				FCC866B21FA753D00093AB03 /* fountainpen@2x.png in Resources */,
 				FC4A9C58203FCF270014F515 /* profile-bg.png in Resources */,
 				FC4A9C57203FCF270014F515 /* icon06.png in Resources */,
+				FCF7737C204D4DE500CF15A8 /* Tutorial.storyboard in Resources */,
 				FC4A9C5C203FCF270014F515 /* icon05.png in Resources */,
 				FC4A9C5A203FCF270014F515 /* icon02.png in Resources */,
 				FC4A9C55203FCF270014F515 /* sidemenu.png in Resources */,
@@ -256,11 +277,14 @@
 				FCC866A51FA739DD0093AB03 /* MemoReadVC.swift in Sources */,
 				FC9B40F81FA5CE28004A613D /* MyMemory.xcdatamodeld in Sources */,
 				FCEC0BA0204D349C000DC226 /* UserInfoKey.swift in Sources */,
+				FCF7737E204E296200CF15A8 /* Utils.swift in Sources */,
 				FCC866A91FA73AAE0093AB03 /* MemoData.swift in Sources */,
 				FC4A9C4A203FCE800014F515 /* SWRevealViewController.m in Sources */,
+				FCF77380204E2A6800CF15A8 /* TutorialContentsVC.swift in Sources */,
 				FCC866A31FA739CF0093AB03 /* MemoFormVC.swift in Sources */,
 				FC4A9C5E203FD1FA0014F515 /* SideBarViewController.swift in Sources */,
 				FC9B40F01FA5CE28004A613D /* AppDelegate.swift in Sources */,
+				FCF77383204E3A9E00CF15A8 /* TutorialMasterVC.swift in Sources */,
 				FC4A9C60203FDA5B0014F515 /* ProfileVC.swift in Sources */,
 				FCC866A71FA73A320093AB03 /* MemoCell.swift in Sources */,
 			);

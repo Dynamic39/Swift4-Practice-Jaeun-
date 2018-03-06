@@ -10,6 +10,9 @@ import UIKit
 
 class SideBarViewController: UITableViewController {
     
+    //userData가져오기
+    let uinfo = UserInfoManager()
+    
     //테이블 뷰 목록 데이터 배열
     let titles = ["새글 작성하기", "친구 새글", "달력으로 보기", "공지사항", "통계", "계정 관리"]
     let icons = [
@@ -32,6 +35,19 @@ class SideBarViewController: UITableViewController {
         
     }
     
+    //view가 새로 갱신될때 마다 불러오기 위해서 viewWillAppear를 사용한다.
+    override func viewWillAppear(_ animated: Bool) {
+        loadUserProfile()
+    }
+    
+    func loadUserProfile() {
+        
+        self.nameLabel.text = self.uinfo.name ?? "Guest"
+        self.emailLabel.text = self.uinfo.account ?? ""
+        self.profileImage.image = self.uinfo.profile
+        
+    }
+    
     //헤더 추가하기
     func addHeaderView() {
         
@@ -42,7 +58,6 @@ class SideBarViewController: UITableViewController {
         //기본 정보 추가하기
         self.nameLabel.frame = CGRect(x: 70, y: 15, width: (headerView.frame.width/3) * 2, height: 30)
         self.nameLabel.textAlignment = .left
-        self.nameLabel.text = "Dynamic39"
         self.nameLabel.textColor = .white
         self.nameLabel.font = UIFont.boldSystemFont(ofSize: 15)
         self.nameLabel.backgroundColor = .clear
@@ -51,14 +66,10 @@ class SideBarViewController: UITableViewController {
         
         self.emailLabel.frame = CGRect(x: 70, y: 30, width: (headerView.frame.width/3) * 2, height: 30)
         self.emailLabel.textAlignment = .left
-        self.emailLabel.text = "sky4411v@gmail.com"
         self.emailLabel.font = UIFont.systemFont(ofSize: 11)
         self.emailLabel.backgroundColor = .clear
         
         headerView.addSubview(self.emailLabel)
-        
-        let defaultProfile = UIImage(named: "account.jpg")
-        self.profileImage.image = defaultProfile
         self.profileImage.frame = CGRect(x: 10, y: 10, width: 50, height: 50)
         
         //프로필 이미지 둥글게 만들기
