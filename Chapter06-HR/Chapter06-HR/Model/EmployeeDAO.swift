@@ -103,11 +103,11 @@ ORDER BY employee.depart_cd ASC
         
         //1. 질의 실행
         let sql = """
-SLECT emp_cd, emp_name, join_date, state_cd, depatment.depart_tittle
-FROM employee
-JOIN department ON department.depart_cd = employee.depart_cd
-WHERE emp_cd = ?
-"""
+                SLECT emp_cd, emp_name, join_date, state_cd, depatment.depart_tittle
+                FROM employee
+                JOIN department ON department.depart_cd = employee.depart_cd
+                WHERE emp_cd = ?
+                """
         
         let rs = self.fmdb.executeQuery(sql, withArgumentsIn: [empCd])
         
@@ -129,7 +129,41 @@ WHERE emp_cd = ?
             print("사원 개인정보를 찾을 수 없습니다.")
             return nil
         }
-
+    }
+    
+    //신규 사원 정보를 추가할 메서드 정의
+    func create(param: EmployeeVO) -> Bool {
+        
+        do {
+            let sql = """
+                    INSERT INTO employee (emp_name, join_date, state_cd, depart_cd)
+                    VALUES (? , ? , ? , ?)
+                    """
+        var params = [Any]()
+            params.append(param.empName)
+            params.append(param.joinDate)
+            params.append(param.stateCd.rawValue)
+            params.append(param.deparCd)
+            
+            try self.fmdb.executeUpdate(sql, values: params)
+            return true
+            
+        } catch let error as NSError {
+            print("INSERT Error: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    //개별 사원정보를 삭제할 메서드를 구현
+    func remove(empCd: Int) -> Bool {
+        do {
+            let sql = "DELETE FROM employee WHERE emp_cd = ? "
+            try self.fmdb.executeUpdate(sql, values: [empCd])
+            return true
+        } catch let error as NSError {
+            print("DELETE ERROR : \(error.localizedDescription)")
+            return false
+        }
     }
     
     
