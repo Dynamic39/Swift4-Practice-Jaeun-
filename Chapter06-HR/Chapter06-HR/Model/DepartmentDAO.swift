@@ -61,6 +61,7 @@ class DepartmentDAO {
                 let departArrd = rs.string(forColumn: "depart_addr")
                 //튜플 사용시 괄호를 꼭 써준다.
                 departList.append((Int(departCd), departTitle!, departArrd!))
+                print("FIND PROCESS SUCSSESS")
             }
             } catch let error as NSError {
                 print("failed: \(error.localizedDescription)")
@@ -68,5 +69,64 @@ class DepartmentDAO {
             //결과 집합 추출
             return departList
         }
+    
+    //단일부서 정보 로드 메서드 정의
+    func get(departCd: Int) -> DepartRecord? {
+        //1. 질의 실행
+        let sql = """
+                SELECT depart_cd, depart_title, depart_addr
+                FROM department
+                WHERE depar_cd = ?
+                """
+        let rs = self.fmdb.executeQuery(sql, withArgumentsIn: [departCd])
+        
+        //결과 집합처리
+        //옵셔널 타입을 반환하므오 바인딩하여 해제
+        if let _rs = rs {
+            _rs.next()
+            
+            let departId = _rs.int(forColumn: "depart_cd")
+            let departTitle = _rs.string(forColumn: "depart_title")
+            let departAddr = _rs.string(forColumn: "depart_addr")
+            
+            print("GET PROCESS SUCSSESS")
+            return (Int(departId), departTitle!, departAddr!)
+            
+        } else { // 결과값이 없을 경우 nil반환
+            return nil
+        }
+    }
+    
+    // 부서정보 추가 메서드
+    func create(title: String!, addr: String!) -> Bool {
+        do {
+            let sql = """
+                    INSERT INTO department (depart_title, depart_addr)
+                    VALUES (?, ?)
+                    """
+            try self.fmdb.executeUpdate(sql, values: [title, addr])
+            print("INSERT PROCESS SUCSSESS")
+            return true
+        } catch let error as NSError {
+            print("INSERT Error: \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    //부서정보 삭제 메서드
+    func remove(departCd: Int) -> Bool {
+        do {
+            let sql = "DELETE FROM department WHERE part_cd = ? "
+            try self.fmdb.executeUpdate(sql, values: [departCd])
+            print("DELETE PROCESS SUCSSESS")
+            
+            return true
+            
+        } catch let error as NSError {
+            print("DELETE Error : \(error.localizedDescription)")
+            
+            return false
+        }
+    }
 }
 
