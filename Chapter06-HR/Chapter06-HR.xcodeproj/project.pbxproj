@@ -18,6 +18,7 @@
 		FC832FCD204FD4B400439294 /* DepartmentDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FCC204FD4B400439294 /* DepartmentDAO.swift */; };
 		FC832FCE204FD7F700439294 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC832FCF204FD7F700439294 /* FMDB.framework */; };
 		FC832FD12050D51300439294 /* EmployeeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FD02050D51300439294 /* EmployeeDAO.swift */; };
+		FC832FD320510DCF00439294 /* DepartPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FD220510DCF00439294 /* DepartPickerVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		FC832FCC204FD4B400439294 /* DepartmentDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentDAO.swift; sourceTree = "<group>"; };
 		FC832FCF204FD7F700439294 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC832FD02050D51300439294 /* EmployeeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDAO.swift; sourceTree = "<group>"; };
+		FC832FD220510DCF00439294 /* DepartPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartPickerVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,9 @@
 		FC832FC3204FD07300439294 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FC832FC6204FD31900439294 /* DepartmentListVC.swift */,
+				FC832FC8204FD32B00439294 /* EmployeeListVC.swift */,
+				FC832FD220510DCF00439294 /* DepartPickerVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -113,8 +118,6 @@
 		FC832FC4204FD07500439294 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				FC832FC6204FD31900439294 /* DepartmentListVC.swift */,
-				FC832FC8204FD32B00439294 /* EmployeeListVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				FC832FC9204FD32B00439294 /* EmployeeListVC.swift in Sources */,
 				FC832FC7204FD31900439294 /* DepartmentListVC.swift in Sources */,
+				FC832FD320510DCF00439294 /* DepartPickerVC.swift in Sources */,
 				FC832FD12050D51300439294 /* EmployeeDAO.swift in Sources */,
 				FC832FCD204FD4B400439294 /* DepartmentDAO.swift in Sources */,
 				FC832FB2204FCD4D00439294 /* AppDelegate.swift in Sources */,

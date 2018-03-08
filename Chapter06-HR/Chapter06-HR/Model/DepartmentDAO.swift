@@ -76,7 +76,7 @@ class DepartmentDAO {
         let sql = """
                 SELECT depart_cd, depart_title, depart_addr
                 FROM department
-                WHERE depar_cd = ?
+                WHERE depart_cd = ?
                 """
         let rs = self.fmdb.executeQuery(sql, withArgumentsIn: [departCd])
         
@@ -116,7 +116,7 @@ class DepartmentDAO {
     //부서정보 삭제 메서드
     func remove(departCd: Int) -> Bool {
         do {
-            let sql = "DELETE FROM department WHERE part_cd = ? "
+            let sql = "DELETE FROM department WHERE depart_cd = ? "
             try self.fmdb.executeUpdate(sql, values: [departCd])
             print("DELETE PROCESS SUCSSESS")
             
