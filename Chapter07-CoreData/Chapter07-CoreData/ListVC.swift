@@ -57,6 +57,28 @@ class ListVC: UITableViewController {
     
     //MARK: - CoreData Handle Method
     
+    //삭제
+    //삭제시 데이터가 컨텍스트에 없는 경우 불러와야한다.
+    //삭제의 행위 자체가 데이터를 없는 것으로 덮어 쓰는것과 비슷하다.
+    func delete(object: NSManagedObject) -> Bool {
+        //1.앱 델리게이트 객체 참조
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //2. 관리 객체 컨텍스트 참조
+        let context = appDelegate.persistentContainer.viewContext
+        //3. 컨텍스트로부터 해당 객체 삭제
+        context.delete(object)
+        
+        //4. 영구 저장소에 커밋하여 준다.
+        do {
+            try context.save()
+            return true
+        } catch {
+            context.rollback()
+            return false
+        }
+    }
+    
+    
     //저장
     func save(title: String, contents:String) -> Bool {
         //1. 앱 델리게이트 객체 참조
@@ -104,6 +126,22 @@ class ListVC: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    //delete 가능하게 만듬
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    //실제로 삭제 코드를 구현하는 메서드
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let object = self.list[indexPath.row] // 삭제될 행
+        
+        //Core Data의 삭제 메서드를 구현한다.
+        if self.delete(object: object) {
+            self.list.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
