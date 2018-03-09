@@ -30,7 +30,6 @@ class DepartPickerVC: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         //1. DB에서 부서 목록을 가져와 튜플 배열을 초기화 한다.
         self.departList = self.departDAO.find()
-        
         self.pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         
         self.pickerView.dataSource = self

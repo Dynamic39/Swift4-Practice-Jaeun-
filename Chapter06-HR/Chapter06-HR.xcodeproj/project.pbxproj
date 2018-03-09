@@ -19,6 +19,7 @@
 		FC832FCE204FD7F700439294 /* FMDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC832FCF204FD7F700439294 /* FMDB.framework */; };
 		FC832FD12050D51300439294 /* EmployeeDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FD02050D51300439294 /* EmployeeDAO.swift */; };
 		FC832FD320510DCF00439294 /* DepartPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FD220510DCF00439294 /* DepartPickerVC.swift */; };
+		FC832FD52051247F00439294 /* DepartmentInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC832FD42051247F00439294 /* DepartmentInfoVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		FC832FCF204FD7F700439294 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC832FD02050D51300439294 /* EmployeeDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeDAO.swift; sourceTree = "<group>"; };
 		FC832FD220510DCF00439294 /* DepartPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartPickerVC.swift; sourceTree = "<group>"; };
+		FC832FD42051247F00439294 /* DepartmentInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentInfoVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				FC832FC6204FD31900439294 /* DepartmentListVC.swift */,
 				FC832FC8204FD32B00439294 /* EmployeeListVC.swift */,
 				FC832FD220510DCF00439294 /* DepartPickerVC.swift */,
+				FC832FD42051247F00439294 /* DepartmentInfoVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				FC832FC7204FD31900439294 /* DepartmentListVC.swift in Sources */,
 				FC832FD320510DCF00439294 /* DepartPickerVC.swift in Sources */,
 				FC832FD12050D51300439294 /* EmployeeDAO.swift in Sources */,
+				FC832FD52051247F00439294 /* DepartmentInfoVC.swift in Sources */,
 				FC832FCD204FD4B400439294 /* DepartmentDAO.swift in Sources */,
 				FC832FB2204FCD4D00439294 /* AppDelegate.swift in Sources */,
 			);

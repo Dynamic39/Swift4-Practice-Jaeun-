@@ -64,17 +64,22 @@ class EmployeeDAO {
     deinit { self.fmdb.close() }
     
     //사원목록을 가져올 FIND 메서드
-    func find() -> [EmployeeVO] {
+    func find(departCd: Int = 0) -> [EmployeeVO] {
         
         var employeeList = [EmployeeVO]()
         
         do {
+            
+            //1. 검색 조건을 추가한다.
+            let conditoin = departCd == 0 ? "" : "WHERE employee.depart_cd = \(departCd)"
+            
             let sql = """
-SELECT emp_cd, emp_name, join_date, state_cd, department.depart_title
-FROM employee
-JOIN department ON department.depart_cd = employee.depart_cd
-ORDER BY employee.depart_cd ASC
-"""
+                    SELECT emp_cd, emp_name, join_date, state_cd, department.depart_title
+                    FROM employee
+                    JOIN department ON department.depart_cd = employee.depart_cd
+                    \(conditoin)
+                    ORDER BY employee.depart_cd ASC
+                    """
            let rs = try self.fmdb.executeQuery(sql, values: nil)
             
             while rs.next() {

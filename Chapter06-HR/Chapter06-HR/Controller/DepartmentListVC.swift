@@ -21,7 +21,6 @@ class DepartmentListVC: UITableViewController {
         self.departList = self.departDAO.find()
         self.initUI()
         
-
     }
     
     //UI초기화 함수
@@ -78,6 +77,20 @@ class DepartmentListVC: UITableViewController {
     }
     
     // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //화면이동시 전달될 코드
+        let departCd = self.departList[indexPath.row].departCd
+        //이동할 대상 뷰 컨트롤러의 인스턴스
+        let infoVC = self.storyboard?.instantiateViewController(withIdentifier: "DEPART_INFO")
+        if let _infoVC = infoVC as? DepartmentInfoVC {
+            _infoVC.departCd = departCd
+            self.navigationController?.pushViewController(_infoVC, animated: true)
+        }
+        
+        
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
