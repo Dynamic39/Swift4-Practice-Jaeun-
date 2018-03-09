@@ -63,6 +63,23 @@ class EmployeeDAO {
     init() { self.fmdb.open() }
     deinit { self.fmdb.close() }
     
+    //MARK: - Method for Handle App
+    func editState(empCd: Int, stateCd: EmpStateType) -> Bool {
+        do {
+            let sql = "UPDATE employee SET state_cd = ? WHERE emp_cd = ? "
+            var params = [Any]()
+            params.append(stateCd.rawValue) // 재직상태 코드
+            params.append(empCd) // 사원 코드
+            try self.fmdb.executeUpdate(sql, values: params)
+            return true
+            
+        } catch let error as NSError {
+            print("UPDATE ERROR FOR CHANGE STATE OF EMPLOYEE : \(error.localizedDescription)")
+            return false
+        }
+    }
+    
+    //MARK: - Required Method for using SQLite3
     //사원목록을 가져올 FIND 메서드
     func find(departCd: Int = 0) -> [EmployeeVO] {
         

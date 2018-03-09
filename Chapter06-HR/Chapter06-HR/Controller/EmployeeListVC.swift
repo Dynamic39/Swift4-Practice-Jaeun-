@@ -15,12 +15,16 @@ class EmployeeListVC: UITableViewController {
     //SQLite 처리를 담당 할 DAO 클래스
     var empDAO = EmployeeDAO()
     
+    //리프레시 컨트롤을 커스텀으로 수정함
+    var loadingImg: UIImageView!
+    var bigCircle: UIView! // 다돌고 나서 마지막에 나타는 원
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //순서에 유의하여, SQLite에서 Data를 가져온 후, UI를 초기화 하여 준다.
         self.empList = self.empDAO.find()
         self.initUI()
-
+        refreshControl()
     }
     
     //초기화 함수
@@ -35,9 +39,53 @@ class EmployeeListVC: UITableViewController {
         
     }
     
+    // MARK: - Handle Method
+    
+    //리프레시 컨트롤을 추가함
+    func refreshControl() {
+        
+        self.refreshControl = UIRefreshControl()
+        
+        self.bigCircle = UIView()
+        bigCircle.backgroundColor = UIColor.yellow
+        bigCircle.center.x = (self.refreshControl?.frame.width)! / 2
+        
+        self.loadingImg = UIImageView(image: UIImage(named: "refresh"))
+        self.loadingImg.center.x = (self.refreshControl?.frame.width)!/2
+        
+        //self.refreshControl?.attributedTitle = NSAttributedString(string: "당겨서 새로고침")
+        
+        self.refreshControl?.tintColor = UIColor.clear // 틴트 값을 제거하면 인디케이터가 나타나지 않으므로, 클리어 처리를 해준다.
+        self.refreshControl?.addSubview(self.loadingImg)
+        self.refreshControl?.addSubview(self.bigCircle)
+        self.refreshControl?.bringSubview(toFront: self.loadingImg) // 해당 뷰를 가장 상단으로 올려준다.
+        self.refreshControl?.addTarget(self, action: #selector(pullToRefresh(_:)), for: .valueChanged)
+    }
+    
+    
     // MARK: - Action Method
     
-    
+    //리프레시 컨트롤이 실행되면 작동하는 액션 메서드
+    @objc func pullToRefresh(_ sender:Any) {
+        
+        let distance = max(0.0, -(self.refreshControl?.frame.origin.y)!)
+        //5. 노란 원이 로딩이미지를 중심으로 커지는 애니매이션 구현
+        UIView.animate(withDuration: 0.5) {
+            self.bigCircle.frame.size.width = 80
+            self.bigCircle.frame.size.height = 80
+            self.bigCircle.center.x = (self.refreshControl?.frame.width)! / 2
+            self.bigCircle.center.y = distance / 2
+            self.bigCircle.layer.cornerRadius = (self.bigCircle.frame.size.width) / 2
+        }
+        
+        self.empList = self.empDAO.find()
+        self.tableView.reloadData()
+        
+        self.refreshControl?.endRefreshing()
+        
+
+        
+    }
     @IBAction func editing(_ sender: Any) {
         
         if self.isEditing == false {
@@ -95,7 +143,30 @@ class EmployeeListVC: UITableViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
+    // MARK: - ScrollView Data Source
     
+    //스크롤 시작
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //스크롤이 발생할 때마다 처리할 내용을 담는다.
+        //refresh 객체의 좌표값을 이용하여, 스크롤에 의해 당겨진 거리를 계산한다.
+        let distance = max(0.0, -(self.refreshControl?.frame.origin.y)!)
+        
+        //center.y 좌표를 당긴 거리만큼 수정
+        self.loadingImg.center.y = distance / 2
+        //당긴 거리만큼 그림이 돌아가게 한다.
+        let ts = CGAffineTransform(rotationAngle: CGFloat(distance/20))
+        self.loadingImg.transform = ts
+        
+        //배경뷰의 중심좌표 설정
+        self.bigCircle.center.y = distance / 2
+        
+    }
+    
+    //스크롤 종료
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        self.bigCircle.frame.size.width = 0
+        self.bigCircle.frame.size.height = 0
+    }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
