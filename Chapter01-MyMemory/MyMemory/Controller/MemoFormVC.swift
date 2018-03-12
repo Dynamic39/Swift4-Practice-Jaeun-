@@ -11,6 +11,7 @@ import UIKit
 class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     var subject:String!
+    lazy var dao = MemoDAO() // 메모 코어 데이터 인스턴스 생성
     
     @IBOutlet var contents: UITextView!
     @IBOutlet var preview: UIImageView!
@@ -126,10 +127,12 @@ class MemoFormVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         data.title = self.subject
         data.contents = self.contents.text
         data.image = self.preview.image
-        data.redate = Date()
+        data.regdate = Date()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.memoList.append(data)
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        appDelegate.memoList.append(data)
+        
+        self.dao.insert(data) // 코어 데이터에 메모 데이터를 추가한다.
     
         self.navigationController?.popViewController(animated: true)
         

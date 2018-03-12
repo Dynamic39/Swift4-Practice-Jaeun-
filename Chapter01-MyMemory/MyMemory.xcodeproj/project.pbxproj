@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC213E0E20565CAB00D1946F /* MemoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC213E0D20565CAB00D1946F /* MemoDAO.swift */; };
 		FC4A9BE7203E866F0014F515 /* CSLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4A9BE6203E866F0014F515 /* CSLogButton.swift */; };
 		FC4A9C4A203FCE800014F515 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4A9C49203FCE800014F515 /* SWRevealViewController.m */; };
 		FC4A9C54203FCF270014F515 /* icon01.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4A9C4B203FCF260014F515 /* icon01.png */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC213E0D20565CAB00D1946F /* MemoDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoDAO.swift; sourceTree = "<group>"; };
 		FC4A9BE6203E866F0014F515 /* CSLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSLogButton.swift; sourceTree = "<group>"; };
 		FC4A9C47203FCE7F0014F515 /* MyMemory-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyMemory-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC4A9C48203FCE800014F515 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../Chapter04-SideBar/Chapter04-SideBar/SWRevealViewController.h"; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				FCC866A81FA73AAE0093AB03 /* MemoData.swift */,
 				FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */,
+				FC213E0D20565CAB00D1946F /* MemoDAO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				FC4A9C4A203FCE800014F515 /* SWRevealViewController.m in Sources */,
 				FCF77380204E2A6800CF15A8 /* TutorialContentsVC.swift in Sources */,
 				FCC866A31FA739CF0093AB03 /* MemoFormVC.swift in Sources */,
+				FC213E0E20565CAB00D1946F /* MemoDAO.swift in Sources */,
 				FC4A9C5E203FD1FA0014F515 /* SideBarViewController.swift in Sources */,
 				FC9B40F01FA5CE28004A613D /* AppDelegate.swift in Sources */,
 				FCF77383204E3A9E00CF15A8 /* TutorialMasterVC.swift in Sources */,
