@@ -69,6 +69,13 @@ class ListVC: UITableViewController {
         object.setValue(contents, forKey: "contents")
         object.setValue(Date(), forKey: "regdate")
         
+        //3-1 Log관리 객체 생성 및 어트리뷰트에 값 대입
+        let logObject = NSEntityDescription.insertNewObject(forEntityName: "Log", into: context) as! LogMO
+        logObject.regdate = Date()
+        logObject.type = LogType.edit.rawValue
+        
+        (object as! BoardMO).addToLogs(logObject)
+        
         //영구 저장소에 반영
         do {
             try context.save()
@@ -114,6 +121,13 @@ class ListVC: UITableViewController {
         object.setValue(contents, forKey: "contents")
         object.setValue(Date(), forKey: "regdate")
         
+        //3-1. Log관리 객체 생성 및 어트리뷰트에 값 대입
+        let logObject = NSEntityDescription.insertNewObject(forEntityName: "Log", into: context) as! LogMO
+        logObject.regdate = Date()
+        logObject.type = LogType.create.rawValue // 열거형을 사용한다.
+        //3-2. 게시글 객체의 logs 속성에 새로 생성된 로그 객체 추가
+        (object as! BoardMO).addToLogs(logObject)
+        
         //4. 영구 저장소에 커밋되고 나면, list프로퍼티에 추가한다.
         //5. 새 게시글 등록시, list의 0번 인덱스에 저장되도록 한다.
         do {
@@ -157,6 +171,15 @@ class ListVC: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    //액세서리가 선택되었을때 구현하는 화면
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let object = self.list[indexPath.row]
+        let uvc = self.storyboard?.instantiateViewController(withIdentifier: "LogVC") as! LogVC
+        
+        uvc.board = object as! BoardMO
+        self.show(uvc, sender: self)
+    }
     
     //셀을 선택하였을 때, 수정가능하게 한다.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

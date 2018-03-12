@@ -13,6 +13,7 @@
 		FC62C81120526C4C00AA6EB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC62C81020526C4C00AA6EB6 /* Assets.xcassets */; };
 		FC62C81420526C4C00AA6EB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC62C81220526C4C00AA6EB6 /* LaunchScreen.storyboard */; };
 		FC62C81C20526D1A00AA6EB6 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC62C81B20526D1A00AA6EB6 /* ListVC.swift */; };
+		FC8836CE205640A70030394B /* LogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8836CD205640A70030394B /* LogVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		FC62C81320526C4C00AA6EB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC62C81520526C4C00AA6EB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC62C81B20526D1A00AA6EB6 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		FC8836CD205640A70030394B /* LogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				FC62C80620526C4C00AA6EB6 /* AppDelegate.swift */,
 				FC62C81B20526D1A00AA6EB6 /* ListVC.swift */,
+				FC8836CD205640A70030394B /* LogVC.swift */,
 				FC62C80A20526C4C00AA6EB6 /* Main.storyboard */,
 				FC62C81020526C4C00AA6EB6 /* Assets.xcassets */,
 				FC62C81220526C4C00AA6EB6 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC62C81C20526D1A00AA6EB6 /* ListVC.swift in Sources */,
+				FC8836CE205640A70030394B /* LogVC.swift in Sources */,
 				FC62C80720526C4C00AA6EB6 /* AppDelegate.swift in Sources */,
 				FC62C80F20526C4C00AA6EB6 /* Chapter07_CoreData.xcdatamodeld in Sources */,
 			);
