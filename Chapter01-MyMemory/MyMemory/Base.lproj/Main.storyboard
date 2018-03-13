@@ -12,6 +12,70 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--신규 계정 등록-->
+        <scene sceneID="s2B-Jp-mrh">
+            <objects>
+                <viewController id="jDj-Gr-9K9" customClass="JoinVC" customModule="MyMemory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RGw-2c-TQf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="A6a-aZ-S0V">
+                                <rect key="frame" x="10" y="80" width="90" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="ITu-aa-qb7"/>
+                                    <constraint firstAttribute="width" constant="90" id="bgO-zs-I4P"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oMV-T8-Ibt">
+                                <rect key="frame" x="110" y="80" width="255" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="MU3-hc-4Qm"/>
+                                    <constraint firstAttribute="width" constant="255" id="OjG-ns-eT7"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="iu5-KO-kKy">
+                                        <rect key="frame" x="0.0" y="28" width="255" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iu5-KO-kKy" id="Xln-fM-wAu">
+                                            <rect key="frame" x="0.0" y="0.0" width="255" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Rti-hQ-vei">
+                                <rect key="frame" x="177" y="292" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pbx-Xn-Tcr" firstAttribute="trailing" secondItem="oMV-T8-Ibt" secondAttribute="trailing" constant="10" id="C8K-RF-Pec"/>
+                            <constraint firstItem="A6a-aZ-S0V" firstAttribute="leading" secondItem="pbx-Xn-Tcr" secondAttribute="leading" constant="10" id="RwK-wy-Nhn"/>
+                            <constraint firstItem="A6a-aZ-S0V" firstAttribute="top" secondItem="pbx-Xn-Tcr" secondAttribute="top" constant="16" id="hhH-uw-GJo"/>
+                            <constraint firstItem="oMV-T8-Ibt" firstAttribute="top" secondItem="pbx-Xn-Tcr" secondAttribute="top" constant="16" id="ykn-bK-zAm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pbx-Xn-Tcr"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="신규 계정 등록" id="dyK-bK-Egt">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="2qP-Iq-zIK">
+                            <connections>
+                                <action selector="submit:" destination="jDj-Gr-9K9" id="g34-E1-4k6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="indicatorView" destination="Rti-hQ-vei" id="f6V-oE-PpZ"/>
+                        <outlet property="profile" destination="A6a-aZ-S0V" id="XPZ-Gz-iyK"/>
+                        <outlet property="tableView" destination="oMV-T8-Ibt" id="VpW-p1-Gth"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Jv-Lx-2EJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2984.8000000000002" y="868.51574212893559"/>
+        </scene>
         <!--목록-->
         <scene sceneID="bVh-CS-gKM">
             <objects>
@@ -338,7 +402,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Tqq-Mi-PjX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="프로필" id="gVk-2u-mKd"/>
+                    <navigationItem key="navigationItem" title="프로필" id="gVk-2u-mKd">
+                        <barButtonItem key="rightBarButtonItem" title="새계정" id="59V-mc-DvJ">
+                            <connections>
+                                <segue destination="jDj-Gr-9K9" kind="show" id="aiS-tx-Cyn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnq-BX-Gws" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -400,4 +470,7 @@
             <point key="canvasLocation" x="1418" y="858"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="account" width="90" height="90"/>
+    </resources>
 </document>

@@ -20,4 +20,16 @@ extension UIViewController {
         return self.turorialSB.instantiateViewController(withIdentifier: name)
     }
     
+    //Alert기능을 어디서든지 활용할 수 있게 간소화 하여 준다.
+    func alert(_ message:String, completion: (()->Void)? = nil) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "확인", style: .cancel, handler: { (_) in
+                completion?() // completion의 매개변수의 값이 nil이 아닐때에만 실행되도록
+            })
+            alert.addAction(okAction)
+            self.present(alert, animated: false, completion: nil)
+        }
+    }
+    
 }
