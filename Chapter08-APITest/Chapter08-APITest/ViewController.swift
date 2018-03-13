@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class ViewController: UIViewController {
     
@@ -143,12 +145,36 @@ class ViewController: UIViewController {
         //6. POST 전송
         task.resume()
         
+        
+        //Alamofire POST
+        alamofirePOST(userId: userId, userName: name)
+        
+        
+    }
+    
+    //Alamofire POST
+    func alamofirePOST(userId: String, userName:String) {
+        
+        let url = "http://swiftapi.rubypaper.co.kr:2029/practice/echo"
+        let param:Parameters = [
+            "userId":userId,
+            "name":userName
+        ]
+        let alamo = Alamofire.request(url, method: .post, parameters: param, encoding: URLEncoding.httpBody, headers: nil)
+        
+        alamo.responseJSON { (response) in
+            print("JSON=\(response.result.value!)")
+            if let jsonObject = response.result.value as?  [String:Any] {
+                print("userId = \(jsonObject["userId"]!)")
+                print("name = \(jsonObject["name"]!)")
+            }
+        }
     }
     
     
     //GET 통신
     @IBAction func callCurrentTime(_ sender: Any) {
-        
+
         do {
             //서버 통신
             let url = URL(string: "http://swiftapi.rubypaper.co.kr:2029/practice/currentTime")
@@ -158,6 +184,15 @@ class ViewController: UIViewController {
         } catch let e as NSError {
             print(e.localizedDescription)
         }
+ 
+ 
+        //Alamofire 방식으로 전송
+        let url = "http://swiftapi.rubypaper.co.kr:2029/practice/currentTime"
+        Alamofire.request(url).responseString { (response) in
+            print("Alamofire 성공여부 : \(response.result.isSuccess)")
+            print("Alamofire 결과값 : \(response.result.value!)")
+        }   
+        
     }
     
     override func didReceiveMemoryWarning() {
