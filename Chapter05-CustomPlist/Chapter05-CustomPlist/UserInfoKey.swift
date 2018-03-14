@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 struct UserInfoKey {
     
@@ -85,20 +86,45 @@ class UserInfoManager {
     }
     
     //login 메서드 구현
-    func login(account:String, password:String) -> Bool
+    func login(account:String, password:String, success: (()->Void)? = nil, fail:((String)->Void)? = nil)
     {
-        if account.isEqual("sky4411v@gmail.com") && password.isEqual("rkd1234")
-        {
-            let ud = UserDefaults.standard
-            ud.set(100, forKey: UserInfoKey.loginID)
-            ud.set(account, forKey: UserInfoKey.account)
-            ud.set("삼규 님", forKey: UserInfoKey.name)
-            ud.synchronize()
-            
-            return true
-        } else
-        {
-            return false
+        //1. URL과 전송할 값 준비
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/login"
+        let param:Parameters = [
+            "account" : account,
+            "passwd" : password,
+        ]
+        //2. API 호출
+        let call = Alamofire.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil)
+        //3. 호출 결과 처리
+        call.responseJSON { (res) in
+            //3-1. JSON형식으로 응답하였는지 확인
+            guard let jsonObject = res.result.value as? NSDictionary else {
+                fail?("잘못된 응답 형식입니다 : \(res.result.value!)")
+                return
+            }
+            //3-2. 응답 코드 확인 0이면 성공
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0  {
+                //로그인 성공
+                //3-3. 로그인 성공 처리 로직이 여기에 들어갑니다.
+                let user = jsonObject["user_info"] as! NSDictionary
+                self.loginID = user["user_id"] as! Int
+                self.account = user["account"] as? String
+                self.name = user["name"] as? String
+                
+                //3-4. user_info 항목 중에서 프로필 이미지 처리
+                if let path = user["profile_path"] as? String {
+                    if let imageData = try? Data(contentsOf: URL(string: path)!) {
+                        self.profile = UIImage(data: imageData)
+                    }
+                }
+                success?()
+                
+            } else {
+                let msg = (jsonObject["error_msg"] as? String) ?? "로그인이 실패했습니다."
+                fail?(msg)
+            }
         }
     }
     

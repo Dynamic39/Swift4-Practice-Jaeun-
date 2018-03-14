@@ -14,6 +14,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     let tv = UITableView()
     let uinfo = UserInfoManager()
     
+    //중복 방지 관리 변수
+    var isCalling = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +30,13 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         self.navigationController?.navigationBar.isHidden = true
         changeProfileImage()
 
+    }
+    
+    @IBAction func backProfileVC(_ segue: UIStoryboardSegue) {
+        
+        //프로필 화면으로 되돌아오기 위한 역할
+        //아무내용도 작성하지 않음
+        
     }
     
     //탭 했을시 제스쳐 동작으로 시행 될 수 있도록 한다.
@@ -97,6 +107,15 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     //로그인 화면 만들기
     @objc func doLogin(_ sender:Any) {
+        
+        //상태 체크
+        if isCalling {
+            self.alert("응답을 기다리는 중입니다. \n잠시만 기다려 주세요.")
+            return
+        } else {
+            isCalling = true
+        }
+        
         let loginAlert = UIAlertController(title: "LOGIN", message: nil, preferredStyle: .alert)
         
         //아이디와 패스워드 텍스트 필드를 설정한다.
@@ -108,24 +127,30 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             tf.placeholder = "Password"
             tf.isSecureTextEntry = true
         }
-        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        loginAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel) {(_) in
+            self.isCalling = false
+        })
         loginAlert.addAction(UIAlertAction(title: "Login", style: .destructive, handler: { (_) in
+            
+            //상태바 안에 인디케이터 활성화하기
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
             let account = loginAlert.textFields?[0].text ?? "" // 첫번째 필드 계정
             let passwd = loginAlert.textFields?[1].text ?? "" // 두번째 필드 비밀번호
             
-            if self.uinfo.login(account: account, password: passwd) {
-                //로그인 성공시 테이블 뷰 갱신 및 해당 프로필 이미지를 갱신한다.
+            //로그인 프로세스 설정
+            //성공하면 클로져를 실행하기 때문에, 클로져가 실행되었을때 작업을 진행하여 준다(비동기 처리)
+            self.uinfo.login(account: account, password: passwd, success: {
                 self.tv.reloadData()
                 self.profileImage.image = self.uinfo.profile
-                self.drawBtn()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self.isCalling = false
+            }, fail: { (msg) in
                 
-            } else {
-                let msg = "로그인에 실패하였습니다."
-                let alert = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
-                self.present(alert, animated: false, completion: nil)
-            }
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                self.isCalling = false
+                self.alert(msg)
+            })
             
         }))
         
