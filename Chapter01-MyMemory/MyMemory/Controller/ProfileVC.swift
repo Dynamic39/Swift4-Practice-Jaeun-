@@ -164,12 +164,19 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { (_) in
-            if self.uinfo.logout() {
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
+            self.uinfo.logout(completion: {
                 //로그아웃이 성공하였을 때 정보를 갱신한다.
+                
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
                 self.tv.reloadData()
                 self.profileImage.image = self.uinfo.profile
                 self.drawBtn()
-            }
+            })
+            
         }))
         self.present(alert, animated: false, completion: nil)
     }
