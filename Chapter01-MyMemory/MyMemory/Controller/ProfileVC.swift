@@ -146,8 +146,19 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
       self.uinfo.login(account: account, password: passwd, success: {
         self.tv.reloadData()
         self.profileImage.image = self.uinfo.profile
+        self.drawBtn()
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
         self.isCalling = false
+        
+        //서버 데이터와 동기화
+        let sync = DataSync()
+        DispatchQueue.global(qos: .background).async {
+          sync.downloadBackupData()
+        }
+        DispatchQueue.global(qos: .background).async {
+          sync.uploadData()
+        }
+        
       }, fail: { (msg) in
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = false

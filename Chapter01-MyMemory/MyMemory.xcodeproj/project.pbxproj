@@ -28,6 +28,7 @@
 		FC9B40F81FA5CE28004A613D /* MyMemory.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC9B40F61FA5CE28004A613D /* MyMemory.xcdatamodeld */; };
 		FC9B40FA1FA5CE28004A613D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC9B40F91FA5CE28004A613D /* Assets.xcassets */; };
 		FC9B40FD1FA5CE28004A613D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC9B40FB1FA5CE28004A613D /* LaunchScreen.storyboard */; };
+		FCC84DE5205BA11300144E0F /* DataSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC84DE4205BA11300144E0F /* DataSync.swift */; };
 		FCC866A11FA739A60093AB03 /* MemoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A01FA739A60093AB03 /* MemoListVC.swift */; };
 		FCC866A31FA739CF0093AB03 /* MemoFormVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A21FA739CF0093AB03 /* MemoFormVC.swift */; };
 		FCC866A51FA739DD0093AB03 /* MemoReadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC866A41FA739DD0093AB03 /* MemoReadVC.swift */; };
@@ -69,6 +70,7 @@
 		FC9B40F91FA5CE28004A613D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC9B40FC1FA5CE28004A613D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC9B40FE1FA5CE28004A613D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCC84DE4205BA11300144E0F /* DataSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSync.swift; sourceTree = "<group>"; };
 		FCC866A01FA739A60093AB03 /* MemoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListVC.swift; sourceTree = "<group>"; };
 		FCC866A21FA739CF0093AB03 /* MemoFormVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoFormVC.swift; sourceTree = "<group>"; };
 		FCC866A41FA739DD0093AB03 /* MemoReadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReadVC.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				FCC866A81FA73AAE0093AB03 /* MemoData.swift */,
 				FCEC0B9F204D349C000DC226 /* UserInfoKey.swift */,
 				FC213E0D20565CAB00D1946F /* MemoDAO.swift */,
+				FCC84DE4205BA11300144E0F /* DataSync.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				FC745DBB20579F2700741869 /* JoinVC.swift in Sources */,
 				FCF7737E204E296200CF15A8 /* Utils.swift in Sources */,
 				FCC866A91FA73AAE0093AB03 /* MemoData.swift in Sources */,
+				FCC84DE5205BA11300144E0F /* DataSync.swift in Sources */,
 				FC4A9C4A203FCE800014F515 /* SWRevealViewController.m in Sources */,
 				FCF77380204E2A6800CF15A8 /* TutorialContentsVC.swift in Sources */,
 				FCC866A31FA739CF0093AB03 /* MemoFormVC.swift in Sources */,
