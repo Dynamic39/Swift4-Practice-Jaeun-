@@ -95,7 +95,7 @@ class UserInfoManager {
     call.responseJSON { res in
       // 3-1. JSON 형식으로 응답했는지 확인
       guard let jsonObject = res.result.value as? NSDictionary else {
-        fail?("잘못된 응답 형식입니다:\(res.result.value!)")
+        fail?("잘못된 응답 형식입니다:\(res.result.value)")
         return
       }
       // 3-2. 응답 코드 확인. 0이면 성공

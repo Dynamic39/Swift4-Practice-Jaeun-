@@ -97,11 +97,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     //사진이 선택되면 자동으로 호출될 메서드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        if let img = info[UIImagePickerControllerEditedImage] as? UIImage {
-            self.uinfo.profile = img
-            self.profileImage.image = img
-        }
-        
+        //네트워크 인디케이터 실행
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         picker.dismiss(animated: true, completion: nil)
         
     }

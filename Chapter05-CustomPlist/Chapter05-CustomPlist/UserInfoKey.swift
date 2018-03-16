@@ -85,6 +85,48 @@ class UserInfoManager {
         }
     }
     
+    //프로필 사진 변경 메서드 구현
+    func newProfile(_ profile:UIImage?, success: (()->Void)? = nil, fail:((String)->Void)? = nil) {
+        
+        //1. API 호출
+        let url = "http://swiftapi.rubypaper.co.kr:2029/userAccount/profile"
+        
+        //2. 인증 헤더
+        let tk = TokenUtils()
+        let header = tk.getAuthorizationHeader()
+        
+        //3. 전송할 프로파일 이미지
+        let profileData = UIImagePNGRepresentation(profile!)?.base64EncodedString()
+        let param:Parameters = ["profile_image": profileData!]
+        
+        //4. 이미지 전송
+        let call = Alamofire.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: header)
+        call.responseJSON { (res) in
+            guard let jsonObject = res.result.value as? NSDictionary else {
+                fail?("올바른 응답값이 아닙니다.")
+                return
+            }
+            
+            //응답 코드 확인 0이면 성공
+            let resultCode = jsonObject["result_code"] as! Int
+            if resultCode == 0 {
+                self.profile = profile
+                success?()
+            } else {
+                let msg = (jsonObject["error_msg"] as? String) ?? "이미지 프로필 변경이 실패했습니다."
+                fail?(msg)
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
     //login 메서드 구현
     func login(account:String, password:String, success: (()->Void)? = nil, fail:((String)->Void)? = nil)
     {
